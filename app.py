@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo 
-import Mission_to_Mars
+import scraping
 
 app = Flask(__name__)
 
@@ -21,4 +21,4 @@ def scrape():
    return redirect('/', code=302)
 
 if __name__ == "__main__":
-   app.run()
+   app.run(debug=True)
