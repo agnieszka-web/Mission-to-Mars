@@ -107,19 +107,20 @@ def hemisphere_data(browser):
     for i in range (4):
         #hemisphere = {}
         browser.find_by_css('a.product-item h3')[i].click()
-        element = browser.find_link_by_text('Sample').first
+        #element = browser.find_link_by_text('Sample').first
         #hemisphere['img_url'] = 
         #hemisphere['title'] = 
-        
-        
-        hemisphere = {'img_url' : element['href'],
-                    'title' : browser.find_by_css('h2.title').text
+        page = soup(browser.html, 'html.parser')
+        image_url = page.find('a', text='Sample').get('href')
+        title = page.find('h2', class_='title').get_text()
+        hemisphere = {'img_url' : image_url,
+                    'title' : title
         }
         hemisphere_image_urls.append(hemisphere)
         browser.back()
    
     
-    return f'{hemisphere_image_urls}'
+    return hemisphere_image_urls
 
 if __name__ == "__main__":
 
